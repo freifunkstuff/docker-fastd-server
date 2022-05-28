@@ -16,11 +16,12 @@ if [ ! -f /config/secret/secret.txt ]; then
 fi
 
 mkdir -p /config/fastd/peers
+chmod 0770 /config/fastd/peers
 cat << EOF > /config/fastd/fastd.conf
 log level ${FASTD_LOG_LEVEL};
 drop capabilities yes;
 bind any:10061;
-mode tap;
+mode multitap;
 interface "mesh-vpn";
 method "salsa2012+umac";
 method "salsa2012+gmac";
