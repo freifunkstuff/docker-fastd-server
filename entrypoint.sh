@@ -11,7 +11,7 @@ set -e
 umask 600
 
 mkdir -p /config/secret
-if [ ! -f /config/secret/secret.txt]; then
+if [ ! -f /config/secret/secret.txt ]; then
  fastd --generate-key > /config/secret/secret.txt
 fi
 
@@ -26,7 +26,7 @@ method "salsa2012+umac";
 method "salsa2012+gmac";
 method "null+salsa2012+umac";
 method "null@l2tp";
-persist iface no;
+persist interface no;
 offload l2tp yes;
 mtu ${FASTD_MTU};
 secret "$( cat /config/secret/secret.txt | grep -e Secret | awk '{ print $2 }' )";
